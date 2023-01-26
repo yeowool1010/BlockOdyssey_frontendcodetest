@@ -87,11 +87,11 @@
 ---
 
 <br/>
-- React
-- react-query v4
-- redux-toolkit
-- CSS
-- JavaScript
+- React<br/>
+- react-query v4<br/>
+- redux-toolkit<br/>
+- CSS<br/>
+- JavaScript<br/>
 <br/>
 <br/>
 
