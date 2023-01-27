@@ -4,15 +4,29 @@ import Ppagination from "./Ppagination";
 import useGetList from "../hook/useGetList";
 
 function ListBox() {
-  const [searchItem, setSearchItem] = useState(100);
+  const [searchItem, setSearchItem] = useState(20);
+  const [items, setItems] = useState();
 
-  const { data: allItems, refetch: itemsRefetch, isSuccess } = useGetList(10);
+  const {
+    data: allItems,
+    refetch: itemsRefetch,
+    // status,
+    // isSuccess,
+    // isLoading,
+    // error,
+  } = useGetList(searchItem);
   //   console.log("url" + process.env.REACT_APP_API_URL);
+
   useEffect(() => {
     itemsRefetch();
   }, []);
-  console.log(allItems);
-  const items = allItems.data.products;
+
+  useEffect(() => {
+    if (allItems !== undefined) {
+      setItems(allItems.data.products);
+      return;
+    }
+  }, [allItems]);
 
   return (
     <section id="list-box">
@@ -33,19 +47,20 @@ function ListBox() {
               </ul>
             </li>
             <li>
-              {items.map((el, idx) => {
-                return (
-                  <ul key={idx}>
-                    <li>{el.id}</li>
-                    <li>{el.title}</li>
-                    <li>{el.brand}</li>
-                    <li>{el.description.slice(0, 40) + "..."}</li>
-                    <li>{"$" + el.price}</li>
-                    <li>{el.rating}</li>
-                    <li>{el.stock}</li>
-                  </ul>
-                );
-              })}
+              {items &&
+                items.map((el, idx) => {
+                  return (
+                    <ul key={idx}>
+                      <li>{el.id}</li>
+                      <li>{el.title}</li>
+                      <li>{el.brand}</li>
+                      <li>{el.description.slice(0, 40) + "..."}</li>
+                      <li>{"$" + el.price}</li>
+                      <li>{el.rating}</li>
+                      <li>{el.stock}</li>
+                    </ul>
+                  );
+                })}
             </li>
           </ul>
         </li>

@@ -4,8 +4,8 @@ import SearchBox from "./components/SearchBox";
 
 function Main() {
   return (
-    <main class="App">
-      <header class="App-header">
+    <main className="App">
+      <header className="App-header">
         <h1>박여울 과제 제출</h1>
       </header>
       <SearchBox />

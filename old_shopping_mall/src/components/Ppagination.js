@@ -4,7 +4,7 @@ import "../styles/Ppagination.css";
 function Ppagination() {
   return (
     <section id="paging">
-      <div class="paging-select-bar">
+      <div className="paging-select-bar">
         <p>페이지당 행</p>
         <select>
           <option>10</option>
