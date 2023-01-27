@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/ListBox.css";
 
 function ListBox() {
+  const [searchItem, setSearchItem] = useState(0);
+
   return (
     <section id="list-box">
       <ul>
         <li>상품리스트</li>
+        <li>검색 된 데이터 {searchItem} 건</li>
         <li>
           <ul id="list-table">
             <li>
