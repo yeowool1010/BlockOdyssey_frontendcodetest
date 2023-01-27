@@ -33,17 +33,20 @@ li {
 }
 
 #list-table > li > ul {
-  clear: both;
+  display: flex;
   padding: 0px auto;
   position: relative;
   min-width: 40px;
 }
 #list-table > li > ul > li {
-  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 10pt;
   border-bottom: 1px solid silver;
   vertical-align: baseline;
 }
+
 /*각 열 너비조정 전체 100% 맞춰야함*/
 /*상품번호*/
 #list-table > li > ul > li:first-child {
