@@ -1,12 +1,14 @@
 import "./App.css";
+import { QueryClient, QueryClientProvider } from "react-query";
+import Main from "./Main";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>프로젝트 개시!</p>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <Main />
+    </QueryClientProvider>
   );
 }
 
