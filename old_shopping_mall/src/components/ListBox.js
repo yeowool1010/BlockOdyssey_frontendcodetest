@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/ListBox.css";
+import Ppagination from "./Ppagination";
 
 function ListBox() {
   const [searchItem, setSearchItem] = useState(0);
@@ -58,6 +59,7 @@ function ListBox() {
           </ul>
         </li>
       </ul>
+      <Ppagination />
     </section>
   );
 }
