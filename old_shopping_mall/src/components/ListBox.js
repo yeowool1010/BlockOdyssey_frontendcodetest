@@ -31,7 +31,7 @@ function ListBox() {
   return (
     <section id="list-box">
       <ul>
-        <li>상품리스트</li>
+        <h2>상품리스트</h2>
         <li>검색 된 데이터 {searchItem} 건</li>
         <li>
           <ul id="list-table">
@@ -48,16 +48,16 @@ function ListBox() {
             </li>
             <li>
               {items &&
-                items.map((el, idx) => {
+                items.map((item, idx) => {
                   return (
                     <ul key={idx}>
-                      <li>{el.id}</li>
-                      <li>{el.title}</li>
-                      <li>{el.brand}</li>
-                      <li>{el.description.slice(0, 40) + "..."}</li>
-                      <li>{"$" + el.price}</li>
-                      <li>{el.rating}</li>
-                      <li>{el.stock}</li>
+                      <li>{item.id}</li>
+                      <li>{item.title}</li>
+                      <li>{item.brand}</li>
+                      <li>{item.description.slice(0, 40) + "..."}</li>
+                      <li>{"$" + item.price}</li>
+                      <li>{item.rating}</li>
+                      <li>{item.stock}</li>
                     </ul>
                   );
                 })}
