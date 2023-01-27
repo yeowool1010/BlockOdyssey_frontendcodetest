@@ -13,6 +13,7 @@ import { Category } from "../categoryDummy/CategoryDummy";
 function ListBox() {
   const [getItem, setGetItem] = useState(100);
   const [items, setItems] = useState();
+  const [caountItems, setCaountItems] = useState(100);
 
   const search = useSelector((state) => state.search.value);
   const getCategorie = search.category;
@@ -40,7 +41,7 @@ function ListBox() {
       //   setItems(allItems.data.products);
       const getAllItems = allItems.data.products;
 
-      if (getCategorie === "전체") {
+      if (getCategorie === Category[0]) {
         const filterdItem = getAllItems
           ? getAllItems.filter(
               (item) =>
@@ -50,34 +51,44 @@ function ListBox() {
             )
           : [];
         setItems(filterdItem);
-      } else if (getCategorie === Category[0]) {
+        setCaountItems(filterdItem.length);
+      }
+
+      if (getCategorie === Category[1]) {
         const filterdItem = getAllItems
           ? getAllItems.filter((item) => item.title.includes(getSearchInput))
           : [];
         setItems(filterdItem);
-      } else if (getCategorie === Category[1]) {
+        setCaountItems(filterdItem.length);
+      }
+
+      if (getCategorie === Category[2]) {
         const filterdItem = getAllItems
           ? getAllItems.filter((item) => item.brand.includes(getSearchInput))
           : [];
         setItems(filterdItem);
-      } else if (getCategorie === Category[2]) {
+        setCaountItems(filterdItem.length);
+      }
+
+      if (getCategorie === Category[3]) {
         const filterdItem = getAllItems
           ? getAllItems.filter((item) =>
               item.description.includes(getSearchInput)
             )
           : [];
         setItems(filterdItem);
+        setCaountItems(filterdItem.length);
       }
 
       return;
     }
-  }, [getSearchInput, allItems]);
+  }, [getSearchInput, getCategorie, allItems]);
 
   return (
     <section id="list-box">
       <ul>
         <h2>상품리스트</h2>
-        <li>검색 된 데이터 {items.length} 건</li>
+        <li>검색 된 데이터 {caountItems} 건</li>
         <li>
           <ul id="list-table">
             <li>

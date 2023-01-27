@@ -10,7 +10,7 @@ import { Category } from "../categoryDummy/CategoryDummy";
  **/
 
 function SearchBox() {
-  const [selectedCtegory, setSelectedCtegory] = useState("전체");
+  const [selectedCtegory, setSelectedCtegory] = useState(Category[0]);
   const [searchInput, setSearchInput] = useState("");
 
   const dispatch = useDispatch();
@@ -36,9 +36,6 @@ function SearchBox() {
       <h2>상품 검색</h2>
       <form onSubmit={handleSubmit} className="search-inner">
         <select id="select-box" onChange={onSelectCategory}>
-          <option id="selectOption" value="전체">
-            전체
-          </option>
           {Category.map((menu, idx) => (
             <option key={idx} value={menu}>
               {menu}
