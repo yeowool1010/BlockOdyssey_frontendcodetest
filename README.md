@@ -26,6 +26,8 @@
 
 ---
 
+API address : https://dummyjson.com/products?limit=100 [JSON]
+<br/>
 ✅ **List**
 <br/>
 
@@ -87,11 +89,11 @@
 ---
 
 <br/>
-- React
-- react-query v4
-- redux-toolkit
-- CSS
-- JavaScript
+- React<br/>
+- react-query v4<br/>
+- redux-toolkit<br/>
+- CSS<br/>
+- JavaScript<br/>
 <br/>
 <br/>
 

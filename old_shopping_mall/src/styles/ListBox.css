@@ -1,0 +1,82 @@
+body {
+  line-height: 2em;
+}
+ul,
+li {
+  list-style: none;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+#list-box {
+  padding: 1.5rem;
+  margin: 0 auto;
+}
+
+#list-box > ul > li:first-child {
+  text-align: center;
+  font-size: 14pt;
+  height: 2rem;
+  vertical-align: middle;
+  line-height: 30px;
+}
+
+#list-table {
+  margin-top: 2rem;
+}
+
+#list-table > li:first-child > ul > li {
+  background-color: #c9c9c9;
+  font-weight: bold;
+  text-align: center;
+}
+
+#list-table > li > ul {
+  display: flex;
+  padding: 0px auto;
+  position: relative;
+  min-width: 40px;
+}
+#list-table > li > ul > li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10pt;
+  border-bottom: 1px solid silver;
+  vertical-align: baseline;
+}
+
+/*각 열 너비조정 전체 100% 맞춰야함*/
+/*상품번호*/
+#list-table > li > ul > li:first-child {
+  width: 10%;
+}
+/*상품명*/
+#list-table > li > ul > li:first-child + li {
+  width: 15%;
+}
+/*브랜드*/
+#list-table > li > ul > li:first-child + li + li {
+  width: 15%;
+}
+/*상품내용*/
+#list-table > li > ul > li:first-child + li + li + li {
+  width: 30%;
+}
+/*가격*/
+#list-table > li > ul > li:first-child + li + li + li + li {
+  width: 10%;
+}
+/*평점*/
+#list-table > li > ul > li:first-child + li + li + li + li + li {
+  width: 10%;
+}
+/*재고*/
+#list-table > li > ul > li:first-child + li + li + li + li + li + li {
+  width: 10%;
+}
+
+.left {
+  text-align: left;
+}

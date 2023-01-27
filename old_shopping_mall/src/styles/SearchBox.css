@@ -1,0 +1,25 @@
+#search-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-flow: column;
+  padding: 0.5rem;
+  height: 8rem;
+  margin: 2rem;
+  border: 0.1rem solid black;
+}
+
+.input-box {
+  width: 20rem;
+  height: 2rem;
+  border: 1px solid black;
+  margin: 0 0.5rem 0 0.5rem;
+}
+
+.search-btn {
+  height: 2rem;
+}
+
+#select-box {
+  height: 2rem;
+}
