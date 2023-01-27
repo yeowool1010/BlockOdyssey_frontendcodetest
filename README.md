@@ -90,7 +90,8 @@ API address : https://dummyjson.com/products?limit=100 [JSON]
 
 <br/>
 - React<br/>
-- react-query v4<br/>
+- react-query<br/>
+- axios<br/>
 - redux-toolkit<br/>
 - CSS<br/>
 - JavaScript<br/>

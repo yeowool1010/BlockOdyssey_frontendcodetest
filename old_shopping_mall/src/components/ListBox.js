@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/ListBox.css";
 import Ppagination from "./Ppagination";
+import useGetList from "../hook/useGetList";
 
 function ListBox() {
-  const [searchItem, setSearchItem] = useState(0);
+  const [searchItem, setSearchItem] = useState(100);
+
+  const { data: allItems, refetch: itemsRefetch, isSuccess } = useGetList(10);
+  //   console.log("url" + process.env.REACT_APP_API_URL);
+  useEffect(() => {
+    itemsRefetch();
+  }, []);
+  console.log(allItems);
+  const items = allItems.data.products;
 
   return (
     <section id="list-box">
@@ -24,37 +33,19 @@ function ListBox() {
               </ul>
             </li>
             <li>
-              <ul>
-                <li>1</li>
-                <li>아이폰</li>
-                <li>애플</li>
-                <li>내용네요ㅕㅇ이.이다아아아</li>
-                <li>1000</li>
-                <li>4.4</li>
-                <li>94</li>
-              </ul>
-            </li>
-            <li>
-              <ul>
-                <li>1</li>
-                <li>아이폰</li>
-                <li>애플</li>
-                <li>내용네요ㅕㅇ이.이다아아아</li>
-                <li>1000</li>
-                <li>4.4</li>
-                <li>94</li>
-              </ul>
-            </li>
-            <li>
-              <ul>
-                <li>1</li>
-                <li>아이폰</li>
-                <li>애플</li>
-                <li>내용네요ㅕㅇ이.이다아아아</li>
-                <li>1000</li>
-                <li>4.4</li>
-                <li>94</li>
-              </ul>
+              {items.map((el, idx) => {
+                return (
+                  <ul key={idx}>
+                    <li>{el.id}</li>
+                    <li>{el.title}</li>
+                    <li>{el.brand}</li>
+                    <li>{el.description.slice(0, 40) + "..."}</li>
+                    <li>{"$" + el.price}</li>
+                    <li>{el.rating}</li>
+                    <li>{el.stock}</li>
+                  </ul>
+                );
+              })}
             </li>
           </ul>
         </li>
