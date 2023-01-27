@@ -2,10 +2,16 @@ import React, { useEffect, useState } from "react";
 import "../styles/ListBox.css";
 import Ppagination from "./Ppagination";
 import useGetList from "../hook/useGetList";
+import { useSelector } from "react-redux";
 
 function ListBox() {
-  const [searchItem, setSearchItem] = useState(20);
+  const [searchItem, setSearchItem] = useState(100);
   const [items, setItems] = useState();
+
+  //   const search = useSelector((state) => (state ? state.search : {}));
+  const search = useSelector((state) => state.search.value);
+  console.log("카테고리받기 성공: " + search.category);
+  console.log("검색키워드 받기 성공: " + search.searchInput);
 
   const {
     data: allItems,
