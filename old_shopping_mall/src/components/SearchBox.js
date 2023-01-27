@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import "../styles/SearchBox.css";
 import { Search } from "../redux/searchSlice";
+import { Category } from "../categoryDummy/CategoryDummy";
 
 /**
  * @author yeowool
- * @description 상품 목록검색 조건과 검색 키워드 return
+ * @description 상품 카테고리(category)와 검색 키워드(searchInput) ListBox로 전달
  **/
-
-const searchMenus = ["상품명", "브랜드", "상품내용"];
 
 function SearchBox() {
   const [selectedCtegory, setSelectedCtegory] = useState("전체");
@@ -40,7 +39,7 @@ function SearchBox() {
           <option id="selectOption" value="전체">
             전체
           </option>
-          {searchMenus.map((menu, idx) => (
+          {Category.map((menu, idx) => (
             <option key={idx} value={menu}>
               {menu}
             </option>

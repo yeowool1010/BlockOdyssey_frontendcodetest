@@ -3,15 +3,23 @@ import "../styles/ListBox.css";
 import Ppagination from "./Ppagination";
 import useGetList from "../hook/useGetList";
 import { useSelector } from "react-redux";
+import { Category } from "../categoryDummy/CategoryDummy";
+
+/**
+ * @author yeowool
+ * @description SearchBox에서 상품 카테고리(category)와 검색 키워드(searchInput) 를 받아서 검색 필터진행
+ **/
 
 function ListBox() {
-  const [searchItem, setSearchItem] = useState(100);
+  const [getItem, setGetItem] = useState(100);
   const [items, setItems] = useState();
 
-  //   const search = useSelector((state) => (state ? state.search : {}));
   const search = useSelector((state) => state.search.value);
-  console.log("카테고리받기 성공: " + search.category);
-  console.log("검색키워드 받기 성공: " + search.searchInput);
+  const getCategorie = search.category;
+  const getSearchInput = search.searchInput;
+
+  //   console.log("카테고리받기 성공: " + getCategorie);
+  //   console.log("검색키워드 받기 성공: " + getSearchInput);
 
   const {
     data: allItems,
@@ -20,7 +28,7 @@ function ListBox() {
     // isSuccess,
     // isLoading,
     // error,
-  } = useGetList(searchItem);
+  } = useGetList(getItem);
   //   console.log("url" + process.env.REACT_APP_API_URL);
 
   useEffect(() => {
@@ -29,16 +37,47 @@ function ListBox() {
 
   useEffect(() => {
     if (allItems !== undefined) {
-      setItems(allItems.data.products);
+      //   setItems(allItems.data.products);
+      const getAllItems = allItems.data.products;
+
+      if (getCategorie === "전체") {
+        const filterdItem = getAllItems
+          ? getAllItems.filter(
+              (item) =>
+                item.description.includes(getSearchInput) ||
+                item.title.includes(getSearchInput) ||
+                item.brand.includes(getSearchInput)
+            )
+          : [];
+        setItems(filterdItem);
+      } else if (getCategorie === Category[0]) {
+        const filterdItem = getAllItems
+          ? getAllItems.filter((item) => item.title.includes(getSearchInput))
+          : [];
+        setItems(filterdItem);
+      } else if (getCategorie === Category[1]) {
+        const filterdItem = getAllItems
+          ? getAllItems.filter((item) => item.brand.includes(getSearchInput))
+          : [];
+        setItems(filterdItem);
+      } else if (getCategorie === Category[2]) {
+        const filterdItem = getAllItems
+          ? getAllItems.filter((item) =>
+              item.description.includes(getSearchInput)
+            )
+          : [];
+        setItems(filterdItem);
+      }
+
       return;
     }
-  }, [allItems]);
+  }, [getSearchInput, allItems]);
 
   return (
     <section id="list-box">
       <ul>
         <h2>상품리스트</h2>
-        <li>검색 된 데이터 {searchItem} 건</li>
+        <li>검색 된 데이터 {items.length} 건</li>
         <li>
           <ul id="list-table">
             <li>
