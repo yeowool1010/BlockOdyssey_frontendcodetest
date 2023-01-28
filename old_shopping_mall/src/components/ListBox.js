@@ -4,7 +4,6 @@ import Ppagination from "./Pagination";
 import useGetList from "../hook/useGetList";
 import { useSelector } from "react-redux";
 import { Category } from "../categoryDummy/CategoryDummy";
-import { QueryCache } from "react-query";
 
 /**
  * @author yeowool
@@ -13,7 +12,7 @@ import { QueryCache } from "react-query";
 
 function ListBox() {
   const [items, setItems] = useState();
-  const [caountItems, setCaountItems] = useState(100);
+  const [countItems, setCountItems] = useState(100);
 
   const search = useSelector((state) => state.search.value);
   const getCategorie = search.category;
@@ -22,19 +21,7 @@ function ListBox() {
   //   console.log("카테고리받기 성공: " + getCategorie);
   //   console.log("검색키워드 받기 성공: " + getSearchInput);
 
-  const {
-    data: allItems,
-    refetch: itemsRefetch,
-    isFetching,
-    isLoading,
-    error,
-  } = useGetList();
-
-  console.log({ isLoading, isFetching });
-
-  useEffect(() => {
-    !allItems && itemsRefetch();
-  }, []);
+  const { data: allItems, isLoading, error } = useGetList();
 
   useEffect(() => {
     if (allItems !== undefined) {
@@ -50,19 +37,19 @@ function ListBox() {
             )
           : [];
         setItems(filterdItem);
-        setCaountItems(filterdItem.length);
+        setCountItems(filterdItem.length);
       } else if (getCategorie === Category[1]) {
         const filterdItem = getAllItems
           ? getAllItems.filter((item) => item.title.includes(getSearchInput))
           : [];
         setItems(filterdItem);
-        setCaountItems(filterdItem.length);
+        setCountItems(filterdItem.length);
       } else if (getCategorie === Category[2]) {
         const filterdItem = getAllItems
           ? getAllItems.filter((item) => item.brand.includes(getSearchInput))
           : [];
         setItems(filterdItem);
-        setCaountItems(filterdItem.length);
+        setCountItems(filterdItem.length);
       } else if (getCategorie === Category[3]) {
         const filterdItem = getAllItems
           ? getAllItems.filter((item) =>
@@ -70,7 +57,7 @@ function ListBox() {
             )
           : [];
         setItems(filterdItem);
-        setCaountItems(filterdItem.length);
+        setCountItems(filterdItem.length);
       }
       return;
     }
@@ -84,7 +71,7 @@ function ListBox() {
     <section id="list-box">
       <ul>
         <h2>상품리스트</h2>
-        <li>검색 된 데이터 {caountItems} 건</li>
+        <li>검색 된 데이터 {countItems} 건</li>
         <li>
           <ul id="list-table">
             <li>
