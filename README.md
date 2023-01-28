@@ -6,6 +6,28 @@
 </br>
 </br>
 
+### 👀 실행방법
+
+---
+
+**old_shopping_mall위치에서 설치, 실행**
+
+```
+yarn install
+```
+
+```
+yarn start
+```
+
+**env환경변수 설정**
+
+- old_shopping_mall위치에 .env파일 생성하여 하단 내용 추가
+
+```
+REACT_APP_API_URL="https://dummyjson.com"
+```
+
 ### 📅 Project period
 
 ---
@@ -14,11 +36,11 @@
 </br>
 </br>
 
-### 🧭 배포링크
+### 👀 데모영상
 
 ---
 
-배포링크
+데모이미지 첨부 예정
 </br>
 </br>
 
@@ -26,7 +48,8 @@
 
 ---
 
-API address : https://dummyjson.com/products?limit=100 [JSON]
+**API address : https://dummyjson.com/products?limit=100 [JSON]**
+
 <br/>
 ✅ **List**
 <br/>
@@ -76,29 +99,22 @@ API address : https://dummyjson.com/products?limit=100 [JSON]
 <br/>
 <br/>
 
-### 👀 데모이미지
-
----
-
-데모이미지 첨부 예정
-</br>
-</br>
-
 ### 🛠 Tech Stacks
 
 ---
 
-<br/>
 - React<br/>
 - react-query<br/>
 - axios<br/>
 - redux-toolkit<br/>
 - CSS<br/>
 - JavaScript<br/>
-<br/>
-<br/>
+  <br/>
+  <br/>
 
-## ✏️Commit Convention
+### ✏️Commit Convention
+
+---
 
 🎉 [init] 프로젝트 개시 </br>
 ✨ [feat] 기능 및 코드 추가 </br>

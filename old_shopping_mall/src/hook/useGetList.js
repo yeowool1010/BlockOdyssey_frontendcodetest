@@ -7,11 +7,11 @@ import getList from "../apis/getList";
 
 /**
  * @author yeowool
- * @description 페이지 수에 따라 상품목록 return
+ * @description useQuery 훅 컴포넌트화
  **/
 
-const useGetList = (limitnum) => {
-  return useQuery(["get/List"], () => getList(limitnum), {
+const useGetList = () => {
+  return useQuery(["get/List"], () => getList(), {
     enabled: false,
   });
 };
