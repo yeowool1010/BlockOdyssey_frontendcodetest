@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/ListBox.css";
-import Ppagination from "./Ppagination";
+import Ppagination from "./Pagination";
 import useGetList from "../hook/useGetList";
 import { useSelector } from "react-redux";
 import { Category } from "../categoryDummy/CategoryDummy";
@@ -11,7 +11,6 @@ import { Category } from "../categoryDummy/CategoryDummy";
  **/
 
 function ListBox() {
-  const [getItem, setGetItem] = useState(100);
   const [items, setItems] = useState();
   const [caountItems, setCaountItems] = useState(100);
 
@@ -25,21 +24,20 @@ function ListBox() {
   const {
     data: allItems,
     refetch: itemsRefetch,
-    // status,
-    // isSuccess,
-    // isLoading,
-    // error,
-  } = useGetList(getItem);
-  //   console.log("url" + process.env.REACT_APP_API_URL);
+    // isFetching,
+    isLoading,
+    error,
+  } = useGetList();
+
+  // console.log({ isLoading, isFetching });
 
   useEffect(() => {
-    itemsRefetch();
+    !allItems && itemsRefetch();
   }, []);
 
   useEffect(() => {
     if (allItems !== undefined) {
-      //   setItems(allItems.data.products);
-      const getAllItems = allItems.data.products;
+      const getAllItems = allItems.products;
 
       if (getCategorie === Category[0]) {
         const filterdItem = getAllItems
@@ -83,6 +81,10 @@ function ListBox() {
       return;
     }
   }, [getSearchInput, getCategorie, allItems]);
+
+  if (isLoading) return <h2>Loading...</h2>;
+
+  if (error) return <h2>An error has occurred: ${error.message}</h2>;
 
   return (
     <section id="list-box">

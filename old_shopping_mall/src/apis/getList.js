@@ -1,19 +1,23 @@
-import axios from "axios";
-
 /**
  * @author yeowool
  * @description 전체 상품목록 api요청
  **/
 
-const getList = async (limitnum) => {
-  return await axios
-    .get(`/products?limit=${limitnum}`, {
-      baseURL: "https://dummyjson.com",
-      headers: {
-        "Content-Type": `application/json`,
-      },
-    })
-    .catch((err) => console.log(err));
+const URL = process.env.REACT_APP_API_URL;
+
+const getList = async () => {
+  const res = await fetch(`${URL}/products?limit=100`, {
+    method: "GET",
+    mode: "cors",
+    cache: "no-cache",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    redirect: "follow",
+    referrer: "no-referrer",
+  });
+  // console.log(await res.json());
+  return await res.json();
 };
 
 export default getList;
