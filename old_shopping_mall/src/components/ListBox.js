@@ -4,6 +4,7 @@ import Ppagination from "./Pagination";
 import useGetList from "../hook/useGetList";
 import { useSelector } from "react-redux";
 import { Category } from "../categoryDummy/CategoryDummy";
+import { setCookie } from "./Cookie";
 
 /**
  * @author yeowool
@@ -12,34 +13,22 @@ import { Category } from "../categoryDummy/CategoryDummy";
 
 function ListBox() {
   const [items, setItems] = useState();
-  const [caountItems, setCaountItems] = useState(100);
+  const [countItems, setCountItems] = useState(100);
 
   const search = useSelector((state) => state.search.value);
   const getCategorie = search.category;
   const getSearchInput = search.searchInput;
 
-  //   console.log("카테고리받기 성공: " + getCategorie);
-  //   console.log("검색키워드 받기 성공: " + getSearchInput);
+  const searchPage = useSelector((state) => state.searchPage.value);
+  const getCurrentPage = searchPage.pageNum;
 
-  const {
-    data: allItems,
-    refetch: itemsRefetch,
-    // isFetching,
-    isLoading,
-    error,
-  } = useGetList();
-
-  // console.log({ isLoading, isFetching });
-
-  useEffect(() => {
-    !allItems && itemsRefetch();
-  }, []);
+  const { data: allItems, isLoading, error } = useGetList();
 
   useEffect(() => {
     if (allItems !== undefined) {
       const getAllItems = allItems.products;
 
-      if (getCategorie === Category[0]) {
+      if (getCategorie === Category[0] || getCategorie === undefined) {
         const filterdItem = getAllItems
           ? getAllItems.filter(
               (item) =>
@@ -49,34 +38,33 @@ function ListBox() {
             )
           : [];
         setItems(filterdItem);
-        setCaountItems(filterdItem.length);
-      }
-
-      if (getCategorie === Category[1]) {
+        setCountItems(filterdItem.length);
+      } else if (getCategorie === Category[1]) {
         const filterdItem = getAllItems
           ? getAllItems.filter((item) => item.title.includes(getSearchInput))
           : [];
         setItems(filterdItem);
-        setCaountItems(filterdItem.length);
-      }
-
-      if (getCategorie === Category[2]) {
+        setCountItems(filterdItem.length);
+      } else if (getCategorie === Category[2]) {
         const filterdItem = getAllItems
           ? getAllItems.filter((item) => item.brand.includes(getSearchInput))
           : [];
         setItems(filterdItem);
-        setCaountItems(filterdItem.length);
-      }
-
-      if (getCategorie === Category[3]) {
+        setCountItems(filterdItem.length);
+      } else if (getCategorie === Category[3]) {
         const filterdItem = getAllItems
           ? getAllItems.filter((item) =>
               item.description.includes(getSearchInput)
             )
           : [];
         setItems(filterdItem);
-        setCaountItems(filterdItem.length);
+        setCountItems(filterdItem.length);
       }
+
+      setCookie("CurrentPageNum", getCurrentPage, 2);
+      setCookie("CurrentCategory", getCategorie, 2);
+      setCookie("CurrentInput", getSearchInput, 2);
+      setCookie("SearchItem", allItems.products, 2);
 
       return;
     }
@@ -90,7 +78,7 @@ function ListBox() {
     <section id="list-box">
       <ul>
         <h2>상품리스트</h2>
-        <li>검색 된 데이터 {caountItems} 건</li>
+        <li>검색 된 데이터 {countItems} 건</li>
         <li>
           <ul id="list-table">
             <li>

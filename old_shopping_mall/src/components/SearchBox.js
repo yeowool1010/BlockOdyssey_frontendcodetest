@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../styles/SearchBox.css";
 import { Search } from "../redux/searchSlice";
 import { Category } from "../categoryDummy/CategoryDummy";
@@ -10,10 +10,14 @@ import { Category } from "../categoryDummy/CategoryDummy";
  **/
 
 function SearchBox() {
-  const [selectedCtegory, setSelectedCtegory] = useState(Category[0]);
-  const [searchInput, setSearchInput] = useState("");
-
   const dispatch = useDispatch();
+
+  const search = useSelector((state) => state.search.value);
+  const getCategorie = search.category;
+  const getSearchInput = search.searchInput;
+
+  const [selectedCtegory, setSelectedCtegory] = useState(Category[0]);
+  const [searchInput, setSearchInput] = useState(getSearchInput);
 
   const onSelectCategory = (e) => {
     e.preventDefault();
@@ -28,7 +32,6 @@ function SearchBox() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(Search({ category: selectedCtegory, searchInput: searchInput }));
-    // console.log("넘기는 값:" + selectedCtegory, searchInput);
   };
 
   return (
@@ -37,7 +40,7 @@ function SearchBox() {
       <form onSubmit={handleSubmit} className="search-inner">
         <select id="select-box" onChange={onSelectCategory}>
           {Category.map((menu, idx) => (
-            <option key={idx} value={menu}>
+            <option key={idx} value={menu} selected={getCategorie === menu}>
               {menu}
             </option>
           ))}
@@ -47,6 +50,7 @@ function SearchBox() {
           className="input-box"
           type="text"
           placeholder="입력하세요."
+          value={searchInput}
         ></input>
         <button type="submit" className="search-btn">
           조회
