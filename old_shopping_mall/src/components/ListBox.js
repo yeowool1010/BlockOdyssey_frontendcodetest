@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import "../styles/ListBox.css";
 import Ppagination from "./Pagination";
 import useGetList from "../hook/useGetList";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Category } from "../categoryDummy/CategoryDummy";
 import { setCookie } from "./Cookie";
+import { FilteredItems } from "../redux/itemSlice";
 
 /**
  * @author yeowool
@@ -12,6 +13,8 @@ import { setCookie } from "./Cookie";
  **/
 
 function ListBox() {
+  const dispatch = useDispatch();
+
   const [items, setItems] = useState();
   const [countItems, setCountItems] = useState(100);
 
@@ -39,18 +42,21 @@ function ListBox() {
           : [];
         setItems(filterdItem);
         setCountItems(filterdItem.length);
+        dispatch(FilteredItems({ items: filterdItem }));
       } else if (getCategorie === Category[1]) {
         const filterdItem = getAllItems
           ? getAllItems.filter((item) => item.title.includes(getSearchInput))
           : [];
         setItems(filterdItem);
         setCountItems(filterdItem.length);
+        dispatch(FilteredItems({ items: filterdItem }));
       } else if (getCategorie === Category[2]) {
         const filterdItem = getAllItems
           ? getAllItems.filter((item) => item.brand.includes(getSearchInput))
           : [];
         setItems(filterdItem);
         setCountItems(filterdItem.length);
+        dispatch(FilteredItems({ items: filterdItem }));
       } else if (getCategorie === Category[3]) {
         const filterdItem = getAllItems
           ? getAllItems.filter((item) =>
@@ -59,12 +65,12 @@ function ListBox() {
           : [];
         setItems(filterdItem);
         setCountItems(filterdItem.length);
+        dispatch(FilteredItems({ items: filterdItem }));
       }
 
       setCookie("CurrentPageNum", getCurrentPage, 2);
       setCookie("CurrentCategory", getCategorie, 2);
       setCookie("CurrentInput", getSearchInput, 2);
-      setCookie("SearchItem", allItems.products, 2);
 
       return;
     }

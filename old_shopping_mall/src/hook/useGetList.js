@@ -1,8 +1,4 @@
-import {
-  useQuery,
-  // useQueryClient,
-  // useQueryErrorResetBoundary,
-} from "react-query";
+import { useQuery } from "react-query";
 import getList from "../apis/getList";
 
 /**
