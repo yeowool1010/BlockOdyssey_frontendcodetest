@@ -4,6 +4,7 @@ import Ppagination from "./Pagination";
 import useGetList from "../hook/useGetList";
 import { useSelector } from "react-redux";
 import { Category } from "../categoryDummy/CategoryDummy";
+import { setCookie } from "./Cookie";
 
 /**
  * @author yeowool
@@ -18,8 +19,8 @@ function ListBox() {
   const getCategorie = search.category;
   const getSearchInput = search.searchInput;
 
-  //   console.log("카테고리받기 성공: " + getCategorie);
-  //   console.log("검색키워드 받기 성공: " + getSearchInput);
+  const searchPage = useSelector((state) => state.searchPage.value);
+  const getCurrentPage = searchPage.pageNum;
 
   const { data: allItems, isLoading, error } = useGetList();
 
@@ -27,7 +28,7 @@ function ListBox() {
     if (allItems !== undefined) {
       const getAllItems = allItems.products;
 
-      if (getCategorie === Category[0]) {
+      if (getCategorie === Category[0] || getCategorie === undefined) {
         const filterdItem = getAllItems
           ? getAllItems.filter(
               (item) =>
@@ -59,6 +60,12 @@ function ListBox() {
         setItems(filterdItem);
         setCountItems(filterdItem.length);
       }
+
+      setCookie("CurrentPageNum", getCurrentPage, 2);
+      setCookie("CurrentCategory", getCategorie, 2);
+      setCookie("CurrentInput", getSearchInput, 2);
+      setCookie("SearchItem", allItems.products, 2);
+
       return;
     }
   }, [getSearchInput, getCategorie, allItems]);
