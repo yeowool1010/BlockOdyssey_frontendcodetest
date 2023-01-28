@@ -1,14 +1,15 @@
 #paging {
   display: flex;
-  margin: 0 auto;
-  width: 25rem;
+  width: 50rem;
   height: 5rem;
+  align-items: center;
+  justify-content: center;
 }
 
-#paging > div {
+#paging > form {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
+  margin: 0 1rem;
   text-align: center;
 }
