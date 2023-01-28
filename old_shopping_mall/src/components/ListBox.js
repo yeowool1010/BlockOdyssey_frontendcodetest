@@ -4,6 +4,7 @@ import Ppagination from "./Pagination";
 import useGetList from "../hook/useGetList";
 import { useSelector } from "react-redux";
 import { Category } from "../categoryDummy/CategoryDummy";
+import { QueryCache } from "react-query";
 
 /**
  * @author yeowool
@@ -24,12 +25,12 @@ function ListBox() {
   const {
     data: allItems,
     refetch: itemsRefetch,
-    // isFetching,
+    isFetching,
     isLoading,
     error,
   } = useGetList();
 
-  // console.log({ isLoading, isFetching });
+  console.log({ isLoading, isFetching });
 
   useEffect(() => {
     !allItems && itemsRefetch();
@@ -50,25 +51,19 @@ function ListBox() {
           : [];
         setItems(filterdItem);
         setCaountItems(filterdItem.length);
-      }
-
-      if (getCategorie === Category[1]) {
+      } else if (getCategorie === Category[1]) {
         const filterdItem = getAllItems
           ? getAllItems.filter((item) => item.title.includes(getSearchInput))
           : [];
         setItems(filterdItem);
         setCaountItems(filterdItem.length);
-      }
-
-      if (getCategorie === Category[2]) {
+      } else if (getCategorie === Category[2]) {
         const filterdItem = getAllItems
           ? getAllItems.filter((item) => item.brand.includes(getSearchInput))
           : [];
         setItems(filterdItem);
         setCaountItems(filterdItem.length);
-      }
-
-      if (getCategorie === Category[3]) {
+      } else if (getCategorie === Category[3]) {
         const filterdItem = getAllItems
           ? getAllItems.filter((item) =>
               item.description.includes(getSearchInput)
@@ -77,7 +72,6 @@ function ListBox() {
         setItems(filterdItem);
         setCaountItems(filterdItem.length);
       }
-
       return;
     }
   }, [getSearchInput, getCategorie, allItems]);
