@@ -9,10 +9,10 @@ export const searchSlice = createSlice({
         getCookie("CurrentCategory") === undefined
           ? "전체"
           : getCookie("CurrentCategory"),
-      searchInput:
-        getCookie("CurrentInput") === undefined
+      searchKeyword:
+        getCookie("CurrentSearchKeyword") === undefined
           ? ""
-          : getCookie("CurrentInput"),
+          : getCookie("CurrentSearchKeyword"),
     },
   },
   reducers: {

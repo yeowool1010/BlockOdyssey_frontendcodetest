@@ -3,13 +3,11 @@ import getList from "../apis/getList";
 
 /**
  * @author yeowool
- * @description useQuery 훅 컴포넌트화
+ * @description useQuery 를 통해 api det data 반
  **/
 
 const useGetList = () => {
-  return useQuery(["get/List"], () => getList(), {
-    // enabled: false,
-  });
+  return useQuery(["get/List"], () => getList());
 };
 
 export default useGetList;
