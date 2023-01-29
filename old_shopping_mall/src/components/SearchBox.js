@@ -48,9 +48,10 @@ function SearchBox() {
           id="select-box"
           onChange={onSelectCategory}
           onKeyDown={moveFocus}
+          defaultValue={getCategorys}
         >
           {Category.map((menu, idx) => (
-            <option key={idx} value={menu} selected={getCategorys === menu}>
+            <option key={idx} value={menu}>
               {menu}
             </option>
           ))}
