@@ -39,8 +39,19 @@ REACT_APP_API_URL="https://dummyjson.com"
 ### 👀 데모영상
 
 ---
+✅ **List**
+![image](https://user-images.githubusercontent.com/99955022/215304352-e3d67213-72d0-4633-9ddd-d6b1b128486b.png)
 
-데모이미지 첨부 예정
+
+✅ **Search**
+![10,20, 50](https://user-images.githubusercontent.com/99955022/215304371-d6fe1169-8cf5-4551-8733-9a560d962786.gif)
+
+![검색, 새로고침시 유지](https://user-images.githubusercontent.com/99955022/215304430-5919fb52-fe04-4a4f-b13c-1d2b329c543b.gif)
+
+
+✅ **Pagination**
+![페이지네이션 새로고침완료](https://user-images.githubusercontent.com/99955022/215304449-a3bbb6c4-aaf2-465a-bfa4-09537df95649.gif)
+
 </br>
 </br>
 
@@ -105,7 +116,6 @@ REACT_APP_API_URL="https://dummyjson.com"
 
 - React<br/>
 - react-query<br/>
-- axios<br/>
 - redux-toolkit<br/>
 - CSS<br/>
 - JavaScript<br/>
