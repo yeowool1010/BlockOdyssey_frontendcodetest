@@ -16,7 +16,6 @@ const getList = async () => {
     redirect: "follow",
     referrer: "no-referrer",
   });
-  // console.log(await res.json());
   return await res.json();
 };
 

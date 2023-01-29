@@ -72,8 +72,6 @@ function ListBox() {
 
   if (error) return <h2>An error has occurred: ${error.message}</h2>;
 
-  // setCookie("CurrentPageNum", getCurrentPage, 2);
-
   return (
     <section id="list-box">
       <ul>

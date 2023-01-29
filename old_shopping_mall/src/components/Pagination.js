@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/Ppagination.css";
 import { useDispatch, useSelector } from "react-redux";
 import { SearchPage } from "../redux/searchPageSlice";
-import { getCookie, setCookie } from "../components/Cookie";
+import { setCookie } from "../components/Cookie";
 
 function Pagination() {
   const [pageBtnList, setPageBtnList] = useState([]);

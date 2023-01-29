@@ -7,9 +7,7 @@ import getList from "../apis/getList";
  **/
 
 const useGetList = () => {
-  return useQuery(["get/List"], () => getList(), {
-    // enabled: false,
-  });
+  return useQuery(["get/List"], () => getList());
 };
 
 export default useGetList;
