@@ -1,6 +1,6 @@
 /**
  * @author yeowool
- * @description 전체 상품목록 api요청
+ * @description 전체 상품목록 fecch를 통해 api요청 환경변수 .env설정 필수
  **/
 
 const URL = process.env.REACT_APP_API_URL;

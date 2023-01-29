@@ -5,10 +5,10 @@ export const searchPageSlice = createSlice({
   name: "searchPage",
   initialState: {
     value: {
-      pageNum:
-        getCookie("CurrentPageNum") === undefined
+      pagingLimitNum:
+        getCookie("CurrentPaginglimit") === undefined
           ? 10
-          : getCookie("CurrentPageNum"),
+          : getCookie("CurrentPaginglimit"),
       itemLength:
         getCookie("ItemLength") === undefined ? 100 : getCookie("ItemLength"),
       selectBtn:

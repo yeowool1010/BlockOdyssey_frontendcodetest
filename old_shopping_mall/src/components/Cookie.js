@@ -1,9 +1,9 @@
 /**
  * @author yeowool
- * @description 쿠키 값 관리하는 함수 컴포넌트//
- * [getCookie] 키값 기준으로 쿠키에 저장된 값을 가져온다 name == 키//
- * [setCookie] 쿠키에 값을 새로 저장한다  name == 키, value == 값, exp == 기간//
- * [deleteCookie] 만료일을 예전으로 설정한 쿠키를 삭제한다.
+ * @description 쿠키 값 관리하는 함수 컴포넌트
+ * @description [getCookie] 키값 기준으로 쿠키에 저장된 값을 가져온다 name == 키
+ * @description [setCookie] 쿠키에 값을 새로 저장한다  name == 키, value == 값, exp == 기간
+ * @description [deleteCookie] 만료일을 예전으로 설정한 쿠키를 삭제한다.
  **/
 
 const getCookie = (name) => {
