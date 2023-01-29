@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import "../styles/ListBox.css";
 import Ppagination from "./Pagination";
 import useGetList from "../hook/useGetList";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Category } from "../categoryDummy/CategoryDummy";
 import { setCookie } from "./Cookie";
+import { SearchPage } from "../redux/searchPageSlice";
 
 /**
  * @author yeowool
@@ -12,6 +13,8 @@ import { setCookie } from "./Cookie";
  **/
 
 function ListBox() {
+  const dispatch = useDispatch();
+
   const [items, setItems] = useState();
   const [countItems, setCountItems] = useState(100);
 
@@ -21,58 +24,55 @@ function ListBox() {
 
   const searchPage = useSelector((state) => state.searchPage.value);
   const getCurrentPage = searchPage.pageNum;
+  const selectBtn = searchPage.selectBtn;
 
   const { data: allItems, isLoading, error } = useGetList();
 
   useEffect(() => {
     if (allItems !== undefined) {
-      const getAllItems = allItems.products;
+      let filterdItem = allItems.products;
 
       if (getCategorie === Category[0] || getCategorie === undefined) {
-        const filterdItem = getAllItems
-          ? getAllItems.filter(
-              (item) =>
-                item.description.includes(getSearchInput) ||
-                item.title.includes(getSearchInput) ||
-                item.brand.includes(getSearchInput)
-            )
-          : [];
-        setItems(filterdItem);
-        setCountItems(filterdItem.length);
+        filterdItem = filterdItem.filter(
+          (item) =>
+            item.description.includes(getSearchInput) ||
+            item.title.includes(getSearchInput) ||
+            item.brand.includes(getSearchInput)
+        );
       } else if (getCategorie === Category[1]) {
-        const filterdItem = getAllItems
-          ? getAllItems.filter((item) => item.title.includes(getSearchInput))
-          : [];
-        setItems(filterdItem);
-        setCountItems(filterdItem.length);
+        filterdItem = filterdItem.filter((item) =>
+          item.title.includes(getSearchInput)
+        );
       } else if (getCategorie === Category[2]) {
-        const filterdItem = getAllItems
-          ? getAllItems.filter((item) => item.brand.includes(getSearchInput))
-          : [];
-        setItems(filterdItem);
-        setCountItems(filterdItem.length);
+        filterdItem = filterdItem.filter((item) =>
+          item.brand.includes(getSearchInput)
+        );
       } else if (getCategorie === Category[3]) {
-        const filterdItem = getAllItems
-          ? getAllItems.filter((item) =>
-              item.description.includes(getSearchInput)
-            )
-          : [];
-        setItems(filterdItem);
-        setCountItems(filterdItem.length);
+        filterdItem = filterdItem.filter((item) =>
+          item.description.includes(getSearchInput)
+        );
       }
+      setCountItems(filterdItem.length);
+      dispatch(SearchPage({ itemLength: filterdItem.length }));
+      filterdItem = filterdItem.slice(
+        (selectBtn - 1) * getCurrentPage,
+        getCurrentPage * selectBtn
+      );
 
-      setCookie("CurrentPageNum", getCurrentPage, 2);
+      console.log(filterdItem.length);
+
       setCookie("CurrentCategory", getCategorie, 2);
       setCookie("CurrentInput", getSearchInput, 2);
-      setCookie("SearchItem", allItems.products, 2);
 
-      return;
+      setItems(filterdItem);
     }
-  }, [getSearchInput, getCategorie, allItems]);
+  }, [getSearchInput, getCategorie, allItems, selectBtn, getCurrentPage]);
 
   if (isLoading) return <h2>Loading...</h2>;
 
   if (error) return <h2>An error has occurred: ${error.message}</h2>;
+
+  // setCookie("CurrentPageNum", getCurrentPage, 2);
 
   return (
     <section id="list-box">
